@@ -15,18 +15,6 @@ import commands
 from optparse import OptionParser
 from termcolor import colored, cprint
 
-#from colorama import init
-#init()
-#from colorama import Fore, Back, Style
-#print(Fore.RED + 'some red text')
-#print(Back.GREEN + 'and with a green background')
-#print(Style.DIM + 'and in dim text')
-#print(Style.RESET_ALL)
-#print('back to normal now')
-#sys.exit(1)
-
-# Colorama didn't help and even made nicewatch lose its color ability.
-
 # Setup some stuff
 dirname = './'
 gitted  = False
@@ -117,10 +105,7 @@ if __name__ == "__main__":
 
     # See whats here
     for root, subdirs, files in os.walk(options.dirname):
-    #for infile in glob.glob( os.path.join(options.dirname, '*') ):
-        #print('--\nroot = ' + root) 
         for infile in subdirs:
-            #print('\t- subdirectory ' + infile)
             #is there a .git file
             infile = os.path.join(root, infile)
             if os.path.exists( os.path.join(root, infile, ".git") ):
@@ -143,14 +128,12 @@ if __name__ == "__main__":
                     j = out.find('On branch');
                     k = out.find('\n', j);
                     branch = out[j+10:k];
-                    #branchColor = bcolors.WARNING;
                     branchColor = 'red'
 
                     if branch == 'master':
                             #branchColor = bcolors.OKGREEN
                             branchColor = 'green'
 
-                    #branch = branchColor + branch + bcolors.ENDC
                     branch = colored(branch, branchColor, attrs=['bold'])
 
                     if len(branch) > branchMax:
@@ -189,10 +172,9 @@ if __name__ == "__main__":
                         if -1 != out.find('Untracked files:'):
                             result += '…'
                         if len(result) == 0:
-                            # Changes found not accounted for above. Could be behind remote or stashed changes, for example.
+                            # Changes found not accounted for above. Could be behind remote, no remote, or stashed changes, for example.
                             result = 'CHANGED'
 
-                        #result = bcolors.FAIL + result + bcolors.ENDC
                         result = colored(result, 'red', attrs=['bold'])
 
                     # Add to repoArray
@@ -221,7 +203,6 @@ if __name__ == "__main__":
 
         branch = "[ " + branch.ljust(branchMax) + " ]"
 
-        #sys.stdout.write("-- " + bcolors.OKBLUE + curFolder.ljust(basenameMax+1) + bcolors.ENDC + branch + " : " + result +"\n")
         sys.stdout.write("-- " + curFolder.ljust(basenameMax+1) + branch + " : " + result +"\n")
 
     # Exit with success
