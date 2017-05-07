@@ -18,6 +18,9 @@ Show Status is awesome. If you tell it a directory to look in, it'll scan throug
 * Fixed a bug where sometimes the script would report no changes when there really were some.
 * Notify you if there is no remote. (I forget to attach to a remote and like to know when that happens.)
 
+## Screenshot
+![Watch show_status in tmux](/gitstatusall.png?raw=true "Real-time Git Status Summary in a tmux pane")
+
 ## Installation
 **Copy show_status to `~/bin`:**
 
