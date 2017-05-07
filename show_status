@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
                 # OK, contains a .git file. Let's descend into it
                 # and ask git for a status
-                out = commands.getoutput('cd '+ infile + '; git status')
+                out = commands.getoutput('cd "'+ infile + '"; git status')
 
                 # Get curFolder and basenameMax
                 curFolder = colored(os.path.basename(os.path.normpath(infile)), 'blue', attrs=['bold'])
@@ -109,9 +109,15 @@ if __name__ == "__main__":
                 if False == options.verbose:
 
                     j = out.find('On branch');
-                    k = out.find('\n', j);
-                    branch = out[j+10:k];
-                    branchColor = 'red'
+
+                    if j < 0:
+                        # Can't find branch. Maybe detached head?
+                        branch = '???'
+                        branchColor = 'red'
+                    else:
+                        k = out.find('\n', j);
+                        branch = out[j+10:k];
+                        branchColor = 'red'
 
                     if branch == 'master':
                             #branchColor = bcolors.OKGREEN
@@ -154,6 +160,12 @@ if __name__ == "__main__":
                             result += '+'
                         if -1 != out.find('Untracked files:'):
                             result += '…'
+                        if -1 != out.find('error: bad index file'):
+                            result = 'Bad index file'
+                        if -1 != out.find('HEAD detached from'):
+                            result = 'Detached HEAD'
+                        if -1 != out.find('Not a git repository'):
+                            result = 'Not a repo'
                         if len(result) == 0:
                             # Changes found not accounted for above. Could be behind remote, no remote, or stashed changes, for example.
                             result = 'CHANGED'
