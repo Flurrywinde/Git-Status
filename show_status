@@ -23,22 +23,6 @@ basenameMax = 0
 branchMax = 0
 repoArray = []
 
-class bcolors:
-	HEADER = '\033[95m'
-	OKBLUE = '\033[94m'
-	OKGREEN = '\033[92m'
-	WARNING = '\033[93m'
-	FAIL = '\033[91m'
-	ENDC = '\033[0m'
-
-	def disable(self):
-		self.HEADER = ''
-		self.OKBLUE = ''
-		self.OKGREEN = ''
-		self.WARNING = ''
-		self.FAIL = ''
-		self.ENDC = ''
-
 parser = OptionParser(description="\
 Show Status is awesome. If you tell it a directory to look in, it'll scan \
 through all the sub dirs looking for a .git directory. When it finds one \
@@ -90,7 +74,6 @@ def show_error(error="Undefined Error!"):
     """Writes an error to stderr"""
     sys.stderr.write(error)
     sys.exit(1)
-
 
 #-------------------
 # Now, onto the main event!
@@ -188,7 +171,6 @@ if __name__ == "__main__":
 
                 # Come out of the dir and into the next
                 commands.getoutput('cd ../')
-
 
     # Exit with error
     if False == gitted:
