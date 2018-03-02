@@ -17,6 +17,7 @@ Show Status is awesome. If you tell it a directory to look in, it'll scan throug
 * Removed extra spaces in the columns for more skinniness.
 * Fixed a bug where sometimes the script would report no changes when there really were some.
 * Notify you if there is no remote. (I forget to attach to a remote and like to know when that happens.)
+* Added a new option, `--needful` to skip repos that are up-to-date.
 
 ## Screenshot
 ![Watch show_status in tmux](/gitstatusall.png?raw=true "Real-time Git Status Summary in a tmux pane")
@@ -36,13 +37,15 @@ Show Status is awesome. If you tell it a directory to look in, it'll scan throug
 Given no parameters, look in current folder and sub-folders for git projects, and display a colorful summary of each one's git status.
 
 **Options:**
-  -h, --help            show this help message and exit
-  -d DIRNAME, --dir=DIRNAME
-                        The directory to parse sub dirs from
-  -v, --verbose         Show the full detail of git status
-  -r REMOTE, --remote=REMOTE
-                        Push to the master (remotename:branchname)
-  -p PULL, --pull=PULL  Pull from the master (remotename:branchname)
+
+|Option|Description|
+|---|---|
+|  -h, --help |           show this help message and exit |
+| -d DIRNAME, --dir=DIRNAME | The directory to parse sub dirs from|
+|  -v, --verbose  |       Show the full detail of git status|
+|  --needful  |       Do not show repos that are up-to-date|
+|  -r REMOTE, --remote=REMOTE| Push to the master (remotename:branchname)|
+|  -p PULL, --pull=PULL|  Pull from the master (remotename:branchname)|
 
 ## Warranties/Guarantees
 None, you're on your own. If you'd like some help, mail me on mike@mikepearce.net

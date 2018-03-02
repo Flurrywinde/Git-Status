@@ -14,6 +14,7 @@ import glob
 import commands
 from optparse import OptionParser
 from termcolor import colored, cprint
+import re
 
 # Setup some stuff
 dirname = './'
@@ -64,6 +65,13 @@ parser.add_option("-p", "--pull",
                 default     = False,
                 help        = "Do a 'git pull' if you've set a remote with -r it will pull from there"
                 )
+
+parser.add_option("--needful",
+                  action    = "store_true",
+                  dest      = "needful",
+                  default   = False,
+                  help      = "Do not show repos that are up-to-date"
+                  )
 
 # Now, parse the args
 (options, args) = parser.parse_args()
@@ -173,7 +181,11 @@ if __name__ == "__main__":
                         result = colored(result, 'red', attrs=['bold'])
 
                     # Add to repoArray
-                    repoArray.append([curFolder, branch, result])
+                    if False == options.needful:
+                        repoArray.append([curFolder, branch, result])
+                    else:
+                        if not re.match(".*No Changes", result):
+                            repoArray.append([curFolder, branch, result])
 
                 else:
                     #Verbose mode: Print raw git status
